@@ -30,6 +30,8 @@ public class App {
 
             } else if (command.contains("Delete")) {
                 actionDelete(command);
+            } else if (command.contains("Edit")) {
+                actionEdit(command);
             }
         }
     }
@@ -81,6 +83,38 @@ public class App {
             }
         }
     }
+
+    private void actionEdit(String cmd) {
+        String[] cmdBits = cmd.split("=",2);
+        int id = Integer.parseInt(cmdBits[1].trim());
+
+        System.out.print("rewrite-Saying) ");
+        String content = sc.nextLine().trim();
+        System.out.print("rewrite-Writer) ");
+        String author = sc.nextLine().trim();
+
+        rewrite(id, content, author);
+
+        System.out.println("%d th saying is modified".formatted(id));
+    }
+
+    private void rewrite( int id, String content, String author) {
+        Wise_saying wiseSaying = findById(id);
+        wiseSaying.saying = content;
+        wiseSaying.writer = author;
+    }
+
+    private Wise_saying findById(int id) {
+        Wise_saying result = null;
+        for (Wise_saying i : list) {
+            if (i.id == id) {
+                result = i;
+                break;
+            };
+        }
+        return result;
+    }
+
 
     static class Wise_saying {
         String saying;
