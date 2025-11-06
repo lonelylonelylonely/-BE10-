@@ -58,10 +58,7 @@ public class App {
     }
 
     private void write(String content, String author) {
-        Wise_saying say = new Wise_saying();
-        say.id = list.size() + 1;
-        say.saying = content;
-        say.writer = author;
+        Wise_saying say = new Wise_saying(list.size() + 1, content, author);
 
         list.add(say);
     }
@@ -116,10 +113,6 @@ public class App {
     }
 
 
-    static class Wise_saying {
-        String saying;
-        String writer;
-        int id;
-    }
+
 }
 
