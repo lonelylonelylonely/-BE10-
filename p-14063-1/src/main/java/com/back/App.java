@@ -28,11 +28,10 @@ public class App {
             } else if (Objects.equals(command , "List")) {
                 actionList();
 
+            } else if (command.contains("Delete")) {
+                actionDelete(command);
             }
-            // else if (Objects.equals(say.command, "Delete")) {  }
-
         }
-
     }
 
     // 고객 응대 로직
@@ -63,6 +62,24 @@ public class App {
         say.writer = author;
 
         list.add(say);
+    }
+
+    private void actionDelete(String cmd) {
+         String[] cmdBits = cmd.split("=",2);
+        int id = Integer.parseInt(cmdBits[1].trim());
+
+         if (list.size() == 0){
+            System.out.println("No Data");
+
+        } else {
+            for (Wise_saying i : list) {
+                if (i.id == id) {
+                    list.remove(i);
+                    System.out.println("%d th saying is deleted".formatted(id));
+                    break;
+                }
+            }
+        }
     }
 
     static class Wise_saying {
