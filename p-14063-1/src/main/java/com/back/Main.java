@@ -1,26 +1,30 @@
 package com.back;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
-
-//TIP 코드를 <b>실행</b>하려면 <shortcut actionId="Run"/>을(를) 누르거나
-// 에디터 여백에 있는 <icon src="AllIcons.Actions.Execute"/> 아이콘을 클릭하세요.
 public class Main {
     public static void main(String[] args) {
-        App app = new App();
-        app.run();
+         App app = new App();
+         app.run();
+
+//        testRq1();
+    }
+
+    private static void testRq1() {
+        Rq rq = new Rq("List?searchKeywordType=content&searchKeyword=Java&page=2");
+        String actionName = rq.getActionName();
+        String searchKeywordType = rq.getParam("searchKeywordType", "");
+        String searchKeyword = rq.getParam("searchKeyword", "");
+        int page = rq.getParamAsInt("page", -1);
+        int id = rq.getParamAsInt("id", -1);
+        String sort = rq.getParam("sort","idDesc");
+
+        System.out.println("actionName : " + actionName);
+        System.out.println("param searchKeywordType : " + searchKeywordType);
+        System.out.println("param searchKeywordType : " + searchKeyword);
+        System.out.println("param page : " + page);
+        System.out.println("param id : " + id);
+        System.out.println("param sort : " + sort);
     }
 }
-
-
-
-
-
-
-
-
 
 
 

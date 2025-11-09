@@ -11,4 +11,16 @@ public class Wise_saying {
         this.saying = content;
         this.writer = author;
     }
+
+    int getId() {
+        return this.id;
+    }
+
+    String getSaying() {
+        return this.saying;
+    }
+
+    String getWriter() {
+        return this.writer;
+    }
 }

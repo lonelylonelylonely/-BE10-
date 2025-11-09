@@ -18,21 +18,26 @@ public class App {
             String command;
             System.out.print("Command) ");
             command = sc.nextLine().trim();
+            Rq rq = new Rq(command);
 
-            if (Objects.equals(command , "End")) {
-                break;
-
-            } else if (Objects.equals(command , "Register")) {
-                actionWrite();
-
-            } else if (Objects.equals(command , "List")) {
-                actionList();
-
-            } else if (command.contains("Delete")) {
-                actionDelete(command);
-            } else if (command.contains("Edit")) {
-                actionEdit(command);
+            switch (rq.getActionName()) {
+                case "End":
+                    System.out.println("Program is ended");
+                    return;
+                case "Register":
+                    actionWrite();
+                    break;
+                case "List":
+                    actionList();
+                    break;
+                case "Delete":
+                    actionDelete(rq);
+                    break;
+                case "Edit":
+                    actionEdit(rq);
+                    break;
             }
+
         }
     }
 
@@ -53,7 +58,7 @@ public class App {
         System.out.println("id / author / content ");
         System.out.println("________________________________");
         for (Wise_saying i : list.reversed()) {
-            System.out.println(i.id + " / " +i.writer + " / " + i.saying);
+            System.out.println(i.id + " / " + i.writer + " / " + i.saying);
         }
     }
 
@@ -63,27 +68,31 @@ public class App {
         list.add(say);
     }
 
-    private void actionDelete(String cmd) {
-         String[] cmdBits = cmd.split("=",2);
-        int id = Integer.parseInt(cmdBits[1].trim());
+    private void actionDelete(Rq rq) {
+        int id = rq.getParamAsInt("id", -1);
 
-         if (list.size() == 0){
-            System.out.println("No Data");
+        if (id == -1) {
+            System.out.println("id value is NOT provided");
+            return;
+        }
 
+        Wise_saying foundSaying = findById(id);
+
+        if (foundSaying == null) {
+            System.out.println("%d th saying does NOT exist".formatted(id));
         } else {
-            for (Wise_saying i : list) {
-                if (i.id == id) {
-                    list.remove(i);
-                    System.out.println("%d th saying is deleted".formatted(id));
-                    break;
-                }
-            }
+            list.remove(foundSaying);
+            System.out.println("%d th saying is deleted".formatted(id));
         }
     }
 
-    private void actionEdit(String cmd) {
-        String[] cmdBits = cmd.split("=",2);
-        int id = Integer.parseInt(cmdBits[1].trim());
+    private void actionEdit(Rq rq) {
+
+        int id = rq.getParamAsInt("id", -1);
+        if (id == -1) {
+            System.out.println("id value is NOT provided");
+            return;
+        }
 
         System.out.print("rewrite-Saying) ");
         String content = sc.nextLine().trim();
@@ -95,7 +104,7 @@ public class App {
         System.out.println("%d th saying is modified".formatted(id));
     }
 
-    private void rewrite( int id, String content, String author) {
+    private void rewrite(int id, String content, String author) {
         Wise_saying wiseSaying = findById(id);
         wiseSaying.saying = content;
         wiseSaying.writer = author;
@@ -104,15 +113,15 @@ public class App {
     private Wise_saying findById(int id) {
         Wise_saying result = null;
         for (Wise_saying i : list) {
-            if (i.id == id) {
+            if (i.getId() == id) {
                 result = i;
                 break;
-            };
+            }
+            ;
         }
         return result;
     }
 
-
-
 }
+
 
