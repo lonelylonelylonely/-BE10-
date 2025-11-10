@@ -8,22 +8,22 @@ public class Main {
 //        testRq1();
     }
 
-    private static void testRq1() {
-        Rq rq = new Rq("List?searchKeywordType=content&searchKeyword=Java&page=2");
-        String actionName = rq.getActionName();
-        String searchKeywordType = rq.getParam("searchKeywordType", "");
-        String searchKeyword = rq.getParam("searchKeyword", "");
-        int page = rq.getParamAsInt("page", -1);
-        int id = rq.getParamAsInt("id", -1);
-        String sort = rq.getParam("sort","idDesc");
-
-        System.out.println("actionName : " + actionName);
-        System.out.println("param searchKeywordType : " + searchKeywordType);
-        System.out.println("param searchKeywordType : " + searchKeyword);
-        System.out.println("param page : " + page);
-        System.out.println("param id : " + id);
-        System.out.println("param sort : " + sort);
-    }
+//    private static void testRq1() {
+//        Rq rq = new Rq("List?searchKeywordType=content&searchKeyword=Java&page=2");
+//        String actionName = rq.getActionName();
+//        String searchKeywordType = rq.getParam("searchKeywordType", "");
+//        String searchKeyword = rq.getParam("searchKeyword", "");
+//        int page = rq.getParamAsInt("page", -1);
+//        int id = rq.getParamAsInt("id", -1);
+//        String sort = rq.getParam("sort","idDesc");
+//
+//        System.out.println("actionName : " + actionName);
+//        System.out.println("param searchKeywordType : " + searchKeywordType);
+//        System.out.println("param searchKeywordType : " + searchKeyword);
+//        System.out.println("param page : " + page);
+//        System.out.println("param id : " + id);
+//        System.out.println("param sort : " + sort);
+//    }
 }
 
 
